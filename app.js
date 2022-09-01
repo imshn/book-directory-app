@@ -7,10 +7,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", bookRoute);
-const PORT = process.env.PORT ||  4000
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log("listening on http://localhost:"+PORT);
-  mongoose.connect("mongodb://localhost/my_db").then(() => {
-    console.log("Mongodb is connected");
-  });
+  console.log("listening on http://localhost:" + PORT);
+  mongoose
+    .connect(
+      "mongodb+srv://shaan:zaim123hashim123ali@cluster0.njl441g.mongodb.net/?retryWrites=true&w=majority"
+    )
+    .then(() => {
+      console.log("Mongodb is connected");
+    });
 });
+//zaim123hashim123ali
