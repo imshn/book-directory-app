@@ -7,9 +7,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", bookRoute);
-
-app.listen(4000, () => {
-  console.log("listening on http://localhost:4000");
+const PORT = process.env.PORT ||  4000
+app.listen(PORT, () => {
+  console.log("listening on http://localhost:"+PORT);
   mongoose.connect("mongodb://localhost/my_db").then(() => {
     console.log("Mongodb is connected");
   });
