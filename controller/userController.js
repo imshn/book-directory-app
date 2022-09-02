@@ -9,6 +9,7 @@ const createUser = async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message);
     else {
       let userModel = model("Users", userSchema);
+
       let userData = new userModel(reqData);
       const newUser = await userData.save();
 
@@ -25,7 +26,7 @@ const login = async (req, res) => {
   const reqData = req.body;
   try {
     let userModel = model("Users", userSchema);
-    let user = await userModel.findOne({ username: reqData.username });
+    let user = await userModel.findOne({ userName: reqData.username });
     if (!user) return res.status(404).send({ message: "User does not exist!" });
     req.session.user = user;
     res.status(200).send({ user: user });

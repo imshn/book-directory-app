@@ -68,7 +68,10 @@ const deleteBookById = async (req, res, next) => {
       { bookId: bookId },
       { new: true }
     );
-    if (!book) return res.status(400).send("Cannot Delete this book");
+    if (!book)
+      return res
+        .status(404)
+        .send(`The book with the id "${bookId}" does not exist!`);
     res.status(200).send({ message: "Book deleted successfully", book });
   } catch (err) {
     res.status(500).send(err.message);
@@ -81,7 +84,10 @@ const getBookById = async (req, res, next) => {
     const bookId = req.params.bookId;
     const bookModel = model("Books", bookSchema);
     const book = await bookModel.findOne({ bookId: bookId });
-    if (!book) return res.status(404).send({ message: "Could not find book" });
+    if (!book)
+      return res
+        .status(404)
+        .send({ message: `The book with the id "${bookId}" does not exist!` });
     res.status(200).send({ book });
   } catch (err) {
     res.status(500).send(err.message);

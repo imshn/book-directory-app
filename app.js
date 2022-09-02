@@ -17,8 +17,8 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", bookRoute);
-app.use("/api", userRoute);
+app.use("/api/book", bookRoute);
+app.use("/api/user", userRoute);
 
 app.get("/api/", function (req, res, next) {
   res.send("<h1>Home page: api</h1>");
