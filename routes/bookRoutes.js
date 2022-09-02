@@ -7,11 +7,12 @@ const {
   getBookById,
   deleteBookById,
 } = require("../controller/bookController");
+const { checkLoggedIn, checkUserType } = require("../middleware/auth");
 
 router.get("/books", getAllBooks);
-router.post("/book/create", CreateBook);
-router.put("/book/:bookId", updateBookById);
-router.delete("/book/:bookId", deleteBookById);
+router.post("/book/create", checkLoggedIn, CreateBook);
+router.put("/book/:bookId", checkLoggedIn, checkUserType, updateBookById);
+router.delete("/book/:bookId", checkLoggedIn, checkUserType, deleteBookById);
 router.get("/book/:bookId", getBookById);
 
 module.exports = router;

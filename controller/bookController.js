@@ -1,6 +1,6 @@
 const { bookSchema } = require("../models/book");
 const { model } = require("mongoose");
-const Joi = require("joi");
+const { validateBook } = require("../utils/utilities");
 
 // create controller
 const CreateBook = (req, res, next) => {
@@ -26,7 +26,7 @@ const CreateBook = (req, res, next) => {
   }
 };
 
-// fecth all books 
+// fecth all books
 const getAllBooks = (req, res, next) => {
   try {
     const bookModel = model("Books", bookSchema);
@@ -59,7 +59,6 @@ const updateBookById = async (req, res, next) => {
   }
 };
 
-
 // delete a particular
 const deleteBookById = async (req, res, next) => {
   try {
@@ -87,17 +86,6 @@ const getBookById = async (req, res, next) => {
   } catch (err) {
     res.status(500).send(err.message);
   }
-};
-
-//  validate book data
-const validateBook = (book) => {
-  const schema = Joi.object({
-    bookId: Joi.string().min(3).required(),
-    bookName: Joi.string().min(3).required(),
-    author: Joi.string().min(3).required(),
-    genres: Joi.string().min(3),
-  });
-  return schema.validate(book);
 };
 
 module.exports = {
