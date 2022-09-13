@@ -6,11 +6,13 @@ const userRoute = require("./routes/userRoutes");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
-
 app.use(cookieParser());
 app.use(
   session({
-    secret: "MIIJKAIBAAKCAgEA3fZHGd7xr6SdOrrd2aYocHsZXgMXX4GFRee",
+    secret: "its secret shaan!",
+    resave: true,
+    maxAge: 24 * 60 * 60,
+    saveUninitialized: false,
   })
 );
 

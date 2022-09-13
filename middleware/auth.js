@@ -21,7 +21,7 @@ const checkIfUserExists = async (req, res, next) => {
   let user = await userModel.findOne({
     userName: reqData.userName,
   });
-  if (user) return res.status(401).send("Username Already Exist!");
+  if (user) return res.status(409).send("Username Already Exist!");
   return next();
 };
 

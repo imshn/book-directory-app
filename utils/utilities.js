@@ -19,4 +19,4 @@ const validateUser = (book) => {
   return schema.validate(book);
 };
 
-module.exports = { validateBook,validateUser };
+module.exports = { validateBook, validateUser };
