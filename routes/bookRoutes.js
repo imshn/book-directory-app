@@ -7,12 +7,15 @@ const {
   getBookById,
   deleteBookById,
 } = require("../controller/bookController");
-const { checkLoggedIn, checkUserType } = require("../middleware/auth");
+const { checkIfAuthenticated, checkUserType } = require("../middleware/auth");
+// public routes
+router.get("/all", getAllBooks);
+router.get("/:bookId", getBookById);
 
-router.get("/books", getAllBooks);
-router.post("/book/create", checkLoggedIn, CreateBook);
-router.put("/book/:bookId", checkLoggedIn, checkUserType, updateBookById);
-router.delete("/book/:bookId", checkLoggedIn, checkUserType, deleteBookById);
-router.get("/book/:bookId", getBookById);
+//  private routes
+router.use(checkIfAuthenticated, checkUserType);
+router.post("/create", CreateBook);
+router.put("/:bookId", updateBookById);
+router.delete("/:bookId", deleteBookById);
 
 module.exports = router;

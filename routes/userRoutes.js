@@ -1,13 +1,14 @@
 const router = require("express").Router();
 const {
   createUser,
-  getUserTypeById,
+  //   getUserTypeById,
   login,
   logout,
 } = require("../controller/userController");
-router.post("/user/create", createUser);
-router.get("/users/:userId", getUserTypeById);
-router.post("/user/logout", logout);
-router.post("/user/login", login);
+const { checkIfUserExists } = require("../middleware/auth");
+router.post("/create", checkIfUserExists, createUser);
+// router.get("/users/:userId", getUserTypeById);
+router.post("/logout", logout);
+router.post("/login", login);
 
 module.exports = router;
